@@ -248,12 +248,12 @@ public class Solution {
         int i = currentIndex/width;
         int j = currentIndex%width;
         
-/*
+
         if(i == 0 && height > 1) {
             System.out.println("First line incomplete, can't proceed");
             return false;
         }
-*/
+
 
         while(currentIndex < height*width) {
             if(i < height - 1 ) {
@@ -343,6 +343,69 @@ public class Solution {
         out.append("]");
         return out.toString();
     }
+
+     public boolean stillPossible(boolean nextValue, GameModel model) {
+        if (this.stillPossible(nextValue)){
+            if (currentIndex/width == 0){
+                return (nextValue && !model.isOn(currentIndex/width,currentIndex%width));
+            }else{
+                return (nextValue && !model.isOn(currentIndex/width-1,currentIndex%width));
+            }
+        }else{
+            return false; 
+        }
+     }
+
+     public boolean finish(GameModel model){
+
+        for(int i = currentIndex/width; i < height ; i++){
+            for(int j = currentIndex%width; j < width; j++) {
+                if(this.stillPossible(true,model)){
+                    setNext(true);
+                }else if (this.stillPossible(false,model)){
+                    setNext(false);
+                }else{
+                    return false; 
+                }
+            }
+        }
+
+        return true; 
+     }
+
+     public boolean isSuccessful(GameModel model){
+        System.out.println("old model is " + model);
+        GameModel tempModel = new GameModel( model.getWidth(),model.getHeight());
+        for (int i = 0; i < height; i++){
+            for (int j = 0; j < width; j++){
+                //System.out.println("i is " + i + "j is " + j);
+                boolean current = board[i][j];
+                tempModel.set(j,i,current);
+            }
+        }
+         System.out.println("new copied model is " + model);
+
+
+        for(int j = 0; j < width*height; j++){
+            if (board[j/width][j%width] == true){
+                return false; 
+            }
+        }
+        return true;
+
+     }
+
+     public int getSize(){
+        int counter = 0;
+        for (int i = 0; i < width; i++){
+            for (int j = 0; j < height; j++ ){
+                if (board[i][j] == true){
+                    counter ++;
+                }
+            }
+        }
+        return counter; 
+     }
 
 }
 
