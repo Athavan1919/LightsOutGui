@@ -25,20 +25,25 @@ public class Q1Tests {
         System.out.println("\ntestSolver");
 
         GameModel model = new GameModel(2,2);
+         System.out.println("1");
         runSolverTest(model,1);
 
         model.set(0,1,true);
+        System.out.println("2");
         runSolverTest(model,1);
 
         model.set(0,0,true);
         model.set(1,0,true);
         model.set(1,1,true);
+        System.out.println("3");
         runSolverTest(model,1);
 
         model = new GameModel(2,3);
+         System.out.println("4");
         runSolverTest(model,4);
 
         model.set(0,0,true);
+        System.out.println("5");
         runSolverTest(model,0);
        
         model = new GameModel(3,3);
@@ -117,7 +122,6 @@ public class Q1Tests {
                 + g.getHeight());
             return;
         }
-  
         // test default values
         for(int i = 0; i < g.getWidth(); i++) {
             for(int j = 0; j < g.getHeight(); j++) {
@@ -158,6 +162,7 @@ public class Q1Tests {
                 }
             }
         }
+
 
         // test setting a single value
         g.set(3,2,true);

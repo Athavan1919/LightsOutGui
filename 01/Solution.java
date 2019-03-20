@@ -345,15 +345,27 @@ public class Solution {
     }
 
      public boolean stillPossible(boolean nextValue, GameModel model) {
-        if (this.stillPossible(nextValue)){
-            if (currentIndex/width == 0){
-                return (nextValue && !model.isOn(currentIndex/width,currentIndex%width));
-            }else{
-                return (nextValue && !model.isOn(currentIndex/width-1,currentIndex%width));
+        //add separate if statement incase it's at last row, last element (check stillPossible from before)
+        boolean possible = this.stillPossible(nextValue);
+        boolean actual = true; 
+        if (possible){
+            if (currentIndex/width > 0){
+                actual = (possible && !model.isOn(currentIndex/width-1,currentIndex%width));
+            }if (currentIndex%width > 0){
+                actual =(possible && !model.isOn(currentIndex/width,currentIndex%width-1));
+            }if (currentIndex%width == (currentIndex/width-1)){
+                actual = (possible && !model.isOn(currentIndex/width,currentIndex%width));
             }
         }else{
-            return false; 
+            if (currentIndex/width > 0){
+                actual = (possible && !model.isOn(currentIndex/width-1,currentIndex%width));
+            }if (currentIndex%width > 0){
+                actual =(possible && !model.isOn(currentIndex/width,currentIndex%width-1));
+            }if (currentIndex%width == (currentIndex/width-1)){
+                actual = (possible && !model.isOn(currentIndex/width,currentIndex%width));
+            }
         }
+        return possible; 
      }
 
      public boolean finish(GameModel model){
@@ -374,21 +386,48 @@ public class Solution {
      }
 
      public boolean isSuccessful(GameModel model){
-        System.out.println("old model is " + model);
+        //System.out.println("old model is " + model);
         GameModel tempModel = new GameModel( model.getWidth(),model.getHeight());
         for (int i = 0; i < height; i++){
             for (int j = 0; j < width; j++){
-                //System.out.println("i is " + i + "j is " + j);
-                boolean current = board[i][j];
-                tempModel.set(j,i,current);
+                boolean modelValue = model.isOn(i,j);
+                tempModel.set(j,i,modelValue);
             }
         }
-         System.out.println("new copied model is " + model);
+         //System.out.println("new copied model is " + tempModel);
 
+        for (int i = 0; i < height; i++){
+            for (int j = 0; j < width; j++){
 
-        for(int j = 0; j < width*height; j++){
-            if (board[j/width][j%width] == true){
-                return false; 
+                if (board[i][j] == true){
+                    tempModel.set(j,i, !tempModel.isOn(i,j));
+                                    
+                if ( (0 <= (j-1)) && ((j-1) < width) ){
+                    tempModel.set(j-1,i, !tempModel.isOn(i,j-1));
+                }
+
+                if ((0 <= (j+1)) && ((j+1) < width)){
+                    tempModel.set(j+1,i, !tempModel.isOn(i,j+1));
+                }
+
+                if ((0 <= (i-1)) && ((i-1) <= height)){
+                    tempModel.set(j,i-1, !tempModel.isOn(i-1,j));
+                }
+
+                if ((0 <= (i+1)) && ((i+1) < height)){
+                    tempModel.set(j,i+1, !tempModel.isOn(i+1,j));
+                }
+                
+                }
+            }
+        }
+        //System.out.println("modified model is " + tempModel);
+
+        for (int i = 0; i < height; i++){
+            for (int j = 0; j < width; j++){
+                if (!tempModel.isOn(i,j)){
+                    return false; 
+                }
             }
         }
         return true;

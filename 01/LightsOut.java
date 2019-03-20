@@ -99,14 +99,22 @@ public class LightsOut {
         Queue<Solution> q  = new QueueImplementation<Solution>();
         ArrayList<Solution> solutions  = new ArrayList<Solution>();
 
-        q.enqueue(new Solution(model.getWidth(),model.getHeight()));
+        Solution temp = new Solution(model.getWidth(),model.getHeight());
+        //System.out.println("temp solution is " +temp);
+        q.enqueue(temp);
         long start = System.currentTimeMillis();
         while(!q.isEmpty()){
+            /*
+            System.out.println("Queue is full with" + q);
+             System.out.println("");
+              System.out.println("Queue ends here");
+              */
             Solution s  = q.dequeue();
             if(s.isSuccessful(model)){
                 // by construction, it is successfull
                 System.out.println("Solution found in " + (System.currentTimeMillis()-start) + " ms" );
                 solutions.add(s);
+                //System.out.println("made it here"); 
             } else {
                 boolean withTrue = s.stillPossible(true,model);
                 boolean withFalse = s.stillPossible(false,model);
@@ -117,12 +125,10 @@ public class LightsOut {
                     s2.setNext(false);
                     q.enqueue(s2);
                 } else if (withTrue) {
-                    s.setNext(true);
                     if(s.finish(model)){
                         q.enqueue(s);
                     }                
                 } else if (withFalse) {
-                    s.setNext(false);
                     if( s.finish(model)){
                         q.enqueue(s); 
                     }               

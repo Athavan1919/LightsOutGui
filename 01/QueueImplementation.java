@@ -47,7 +47,11 @@ public class QueueImplementation<E> implements Queue<E> {
     public boolean isEmpty() {
 
         int length = queue.size();
+        //System.out.println("Size is "+ length);
         return (length == 0);
         
+    }
+    public String toString(){
+        return queue.toString();
     }
 }

@@ -23,26 +23,28 @@ public class GameModel {
 	}
 	
 	public void set(int i, int j, boolean value) {
-		gameArray[j][i] = value;
 
+		gameArray[j][i] = value;
+		
 		/*
-	    if ((0 <= (j-1)) && ((j-1) < row)){
-            gameArray[j-1][i] = (!gameArray[j-1][i]);
+	    if ( (0 <= (j-1)) && ((j-1) < row) ){
+            gameArray[j-1][i] = value;
         }
 
         if ((0 <= (j+1)) && ((j+1) < row)){
-            gameArray[j+1][i] = !gameArray[j-1][i];
+            gameArray[j+1][i] = value;
         }
 
         if ((0 <= (i-1)) && ((i-1) <= column)){
-            gameArray[j][i-1] = !gameArray[j][i-1];
+            gameArray[j][i-1] = value;
         }
 
         if ((0 <= (i+1)) && ((i+1) < column)){
-            gameArray[j][i+1] = !gameArray[j][i+1];
+            gameArray[j][i+1] = value;
         }
-		//oddCounter[j][i] += 1;
 		*/
+		
+		
 	}
 	
 	public boolean isOn(int i, int j) {
