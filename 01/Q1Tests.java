@@ -47,15 +47,17 @@ public class Q1Tests {
         runSolverTest(model,0);
        
         model = new GameModel(3,3);
+        System.out.println("6");
         runSolverTest(model,1);
 
         model.set(0,0,true);
         model.set(1,1,true);
         model.set(2,2,true);
+        System.out.println("7");
         runSolverTest(model,1);
    }
 
-    /*
+    
     public static void runShortestSolverTest(GameModel model, int size){
 
         System.out.println("For model :");
@@ -81,32 +83,37 @@ public class Q1Tests {
         System.out.println(s);
 
     }
-    */
 
-    /*
+
+    
     private static void testShortest(){
         System.out.println("\ntestShortest");
         GameModel model = new GameModel(2,2);
+         System.out.println("1");
         runShortestSolverTest(model,4);
         
         model = new GameModel(3,2);
+        System.out.println("2");
         runShortestSolverTest(model,2);
 
         model.set(2,0,true);
         model.set(0,1,true);
         model.set(1,1,true);
+        System.out.println("3");
         runShortestSolverTest(model,2);
 
         model.reset();
         model.set(0,0,true);
         model.set(1,0,true);
         model.set(0,1,true);
+        System.out.println("4");
         runShortestSolverTest(model,1);
 
         model = new GameModel(4,4);
+        System.out.println("5");
         runShortestSolverTest(model,4);
     }
-    */
+    
 
     private static void testModel(){
     
@@ -186,7 +193,7 @@ public class Q1Tests {
     public static void main(String[] args) {
         StudentInfo.display();
         testSolver();
-        //testShortest();
+        testShortest();
         testModel();
 
     }
