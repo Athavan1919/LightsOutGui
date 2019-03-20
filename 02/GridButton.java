@@ -1,9 +1,29 @@
-// YOUR IMPORT HERE
+import java.util.Random;
+
+import java.awt.Color;
+import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.BorderFactory;
+import javax.swing.border.Border;
+
+
 
 public class GridButton extends JButton {
+    
+    private static Random generator = new Random();
+
+    public static final int NUM_STATE = 4;
+    
+    private boolean isOn = false;
+    private boolean isClicked = false;
 
 
-    // YOUR VARIABLES HERE
+    private int row, column;
+    private int type;
+    
+    private static final ImageIcon[] icons = new ImageIcon[NUM_STATE];
 
 
     /**
@@ -16,9 +36,23 @@ public class GridButton extends JButton {
      *            the row of this Cell
      */
 
-    public GridButton(int column, int row) {
+    public GridButton(int column, int row, int type, GameView board) {
+            
+            this.column = column;
+            this.row = row;
+            this.type = type;
+    
+            setBackground(Color.WHITE);
+            setIcon(getImageIcon());
+            Border emptyBorder = BorderFactory.createEmptyBorder(0, 0, 0, 0);
+            setBorder(emptyBorder);
+            setBorderPainted(false);
+            //addActionListener(board);
 
-        // YOUR CODE HERE
+    }
+    
+    public GridButton(int column, int row, GameView board) {
+            this(column, row, generator.nextInt(NUM_STATE), board);
     }
 
    /**
@@ -29,8 +63,10 @@ public class GridButton extends JButton {
     * tapped in the model's current solution
     */ 
     public void setState(boolean isOn, boolean isClicked) {
-
-        // YOUR CODE HERE
+        
+            this.isOn = isOn;
+            this.isClicked = isClicked;
+            setIcon(getImageIcon());            
 
     }
 
@@ -43,7 +79,7 @@ public class GridButton extends JButton {
      */
 
     public int getRow() {
-        // YOUR CODE HERE
+            return row;
     }
 
     /**
@@ -53,8 +89,33 @@ public class GridButton extends JButton {
      */
 
     public int getColumn() {
-        // YOUR CODE HERE
+            return column;
     }
 
-    // YOUR OTHER METHODS HERE
+    private ImageIcon getImageIcon() {
+                
+            int id;
+            if (isOn) {
+                id = NUM_STATE + 1;
+            } else {
+                id = type;
+            }
+            if (icons[id] == null) {
+                String strId = Integer.toString(id);
+                icons[id] = new ImageIcon(this.getClass().getResource("Light-"+ strId + ".png"));
+            }
+            return icons[id];
+        }
+    
+    private int newRandomCellType() {
+            return generator.nextInt(NUM_STATE);
+    }
+    
+    public void reset() {
+            type = newRandomCellType();
+            setIcon(getImageIcon());
+            isOn = false;
+    }
+
+
 }
