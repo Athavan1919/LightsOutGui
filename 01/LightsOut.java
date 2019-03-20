@@ -54,9 +54,10 @@ public class LightsOut {
      *  an instance of <b>ArrayList&lt;Solution&gt;</b>
      * containing all the solutions
      */
+    
     public static ArrayList<Solution> solve(int width, int height){
 
-        SolutionQueue q  = new ArrayListSolutionQueue();
+         SolutionQueue q  = new ArrayListSolutionQueue();
         ArrayList<Solution> solutions  = new ArrayList<Solution>();
 
         q.enqueue(new Solution(width,height));
@@ -84,6 +85,51 @@ public class LightsOut {
                 } else if (withFalse) {
                     s.setNext(false);
                     if( s.finish()){
+                        q.enqueue(s); 
+                    }               
+                }
+            }
+        }
+        return solutions;
+    }
+    
+
+    public static ArrayList<Solution> solve(GameModel model){
+
+        Queue<Solution> q  = new QueueImplementation<Solution>();
+        ArrayList<Solution> solutions  = new ArrayList<Solution>();
+
+        Solution temp = new Solution(model.getWidth(),model.getHeight());
+        //System.out.println("temp solution is " +temp);
+        q.enqueue(temp);
+        long start = System.currentTimeMillis();
+        while(!q.isEmpty()){
+            /*
+            System.out.println("Queue is full with" + q);
+             System.out.println("");
+              System.out.println("Queue ends here");
+              */
+            Solution s  = q.dequeue();
+            if(s.isSuccessful(model)){
+                // by construction, it is successfull
+                System.out.println("Solution found in " + (System.currentTimeMillis()-start) + " ms" );
+                solutions.add(s);
+                //System.out.println("made it here"); 
+            } else {
+                boolean withTrue = s.stillPossible(true,model);
+                boolean withFalse = s.stillPossible(false,model);
+                if(withTrue && withFalse) {
+                    Solution s2 = new Solution(s);
+                    s.setNext(true);
+                    q.enqueue(s);
+                    s2.setNext(false);
+                    q.enqueue(s2);
+                } else if (withTrue) {
+                    if(s.finish(model)){
+                        q.enqueue(s);
+                    }                
+                } else if (withFalse) {
+                    if( s.finish(model)){
                         q.enqueue(s); 
                     }               
                 }
