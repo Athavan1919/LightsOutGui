@@ -71,8 +71,7 @@ public class GameView extends JFrame {
         for (int row = 0; row < gameModel.getHeight(); row++) {
             for (int column = 0; column < gameModel.getWidth(); column++) {
                     if(gameModel.isOn(row, column)) {
-                        board[row][column] = new GridButton(this, row, column, 0);
-                        add(board[row][column]);
+                        board[row][column].setState(true, true);
                     }
             }
         }
@@ -96,6 +95,12 @@ public class GameView extends JFrame {
     public static void main(String[] args) {
             GameModel o = new GameModel(3,4);
             o.set(0, 2, true);
+            o.set(0, 1, true);
+            o.set(2, 1, true);
+            o.set(2, 1, true);
+
+
+
             GameView z = new GameView(o);
             z.update();
     }
