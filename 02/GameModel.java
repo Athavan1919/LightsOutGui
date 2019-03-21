@@ -44,7 +44,7 @@ public class GameModel {
 	}
 
 	public void click(int i, int j){
-        set(j , i , !.isOn(i,j));
+        set(j , i , !isOn(i,j));
                         
         if ( (0 <= (j-1)) && ((j-1) < column) ){
             set(j-1,i, !isOn(i,j-1));
@@ -71,18 +71,27 @@ public class GameModel {
 	}
 
 	public boolean isFinished(){
-		for (int i = 0; i < rowl i++){
+		for (int i = 0; i < row; i++){
 			for (int j = 0; j < column; j++){
 				if (!gameArray[i][j]){
 					return false; 
 				}
 			}
 		}
+		return true;
 	}
-	//randomize() method add
+	public void randomize(){
+		this.reset();
+		for (int i = 0; i < row; i++){
+			for (int j = 0; j < column; j++){
+				this.set(i,j, Math.random() <0.5);
+			}
+		}
+	}
 
 	public void setSolution(){
-		minimal = LightsOut.solveShortest(model);
+		minimal = LightsOut.solveShortest(this);
+		System.out.println (minimal);
 	}
 
 	public boolean solutionSelects(int i, int j){

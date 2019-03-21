@@ -76,7 +76,6 @@ public class LightsOut {
 
         Solution shortest = solutions.get(0);
         
-        System.out.println("Solutions size is " + solutions.size());
         for (int i = 0; i < solutions.size(); i++){
             if (solutions.get(i).getSize() < shortest.getSize()){
                 shortest = solutions.get(i);
