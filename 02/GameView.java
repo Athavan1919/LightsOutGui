@@ -1,6 +1,15 @@
+import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 
-// your other import here if needed
+import java.awt.Color;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.BorderFactory;
+
+import javax.swing.JPanel;
 
 /**
  * The class <b>GameView</b> provides the current view of the entire Game. It extends
@@ -12,8 +21,12 @@ import javax.swing.*;
 
 public class GameView extends JFrame {
 
-    // your variables here
 
+    private GameModel gameModel;
+    
+    private GridButton[][] board;
+    
+    JPanel p = new JPanel();
 
     /**
      * Constructor used for initializing the Frame
@@ -24,10 +37,26 @@ public class GameView extends JFrame {
      *            the controller
      */
 
-    public GameView(GameModel gameModel, GameController gameController) {
+    public GameView(GameModel gameModel/*, GameController gameController*/) {
+            super("Light Out -- The ITI 1121 version");
+            setSize(400,400);
+            setResizable(false);
+            setDefaultCloseOperation(EXIT_ON_CLOSE);
+            setBackground(Color.WHITE);
 
-        // YOUR CODE HERE
+            this.gameModel = gameModel;
+            setLayout(new GridLayout(gameModel.getHeight(), gameModel.getWidth()));
+            //setBorder(BorderFactory.createEmptyBorder(20, 20, 0, 20));
+            board = new GridButton[gameModel.getHeight()][gameModel.getWidth()];
+            
+            for (int row = 0; row < gameModel.getHeight(); row++) {
+                for (int column = 0; column < gameModel.getWidth(); column++) {
+                        board[row][column] = new GridButton(this, row, column, 1);
+                        add(board[row][column]);
+                }
+            }
 
+            setVisible(true);
     }
 
     /**
@@ -36,9 +65,19 @@ public class GameView extends JFrame {
      */
 
     public void update(){
+        
+        //setBorder(BorderFactory.createEmptyBorder(20, 20, 0, 20));
 
-        // YOUR CODE HERE
+        for (int row = 0; row < gameModel.getHeight(); row++) {
+            for (int column = 0; column < gameModel.getWidth(); column++) {
+                    if(gameModel.isOn(row, column)) {
+                        board[row][column] = new GridButton(this, row, column, 0);
+                        add(board[row][column]);
+                    }
+            }
+        }
 
+        setVisible(true);
     }
 
     /**
@@ -52,6 +91,13 @@ public class GameView extends JFrame {
 
         // YOUR CODE HERE
 
+    }
+    
+    public static void main(String[] args) {
+            GameModel o = new GameModel(3,4);
+            o.set(0, 2, true);
+            GameView z = new GameView(o);
+            z.update();
     }
 
 }
