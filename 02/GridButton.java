@@ -116,6 +116,14 @@ public class GridButton extends JButton {
             setIcon(getImageIcon());
             isOn = false;
     }
+    
+    public int getType() {
+            return type;
+    }
+    
+    public boolean sameType(GridButton other) {
+            return type == other.type;
+    }
 
 
 }
