@@ -42,52 +42,6 @@ public class GameModel {
 		}
 	}
 
-	public void click(int i, int j){
-        set(j , i , !.isOn(i,j));
-                        
-        if ( (0 <= (j-1)) && ((j-1) < column) ){
-            set(j-1,i, !isOn(i,j-1));
-        }
-
-        if ((0 <= (j+1)) && ((j+1) < column)){
-            set(j+1,i, !isOn(i,j+1));
-        }
-
-        if ((0 <= (i-1)) && ((i-1) <= row)){
-            set(j,i-1, !isOn(i-1,j));
-        }
-
-        if ((0 <= (i+1)) && ((i+1) < row)){
-            set(j,i+1, !isOn(i+1,j));
-        }
-        
-        numberOfClicks++;
-       
-	}
-
-	public int getNumberOfSteps(){
-		return numberOfClicks;
-	}
-
-	public boolean isFinished(){
-		for (int i = 0; i < rowl i++){
-			for (int j = 0; j < column; j++){
-				if (!gameArray[i][j]){
-					return false; 
-				}
-			}
-		}
-	}
-
-	public void setSolution(){
-		minimal = LightsOut.solveShortest(model);
-	}
-
-	public boolean solutionSelects(int i, int j){
-		return minimal.get(i,j);
-	}
-
-
 	public String toString() {
 		String array_output = "[[";
 		for (int row = 0; row < gameArray.length; row++) {

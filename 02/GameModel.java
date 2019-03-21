@@ -5,15 +5,16 @@ public class GameModel {
 	private int row;
 	private int column;
 	private boolean[][] gameArray;
-	private int[][] oddCounter;
-	private int counter = 0;
+	private int numberOfClicks;
+	private Solution minimal;
+
 
 	
 	public GameModel(int width, int height) {
 		row = height;
 		column = width;
 		gameArray = new boolean[row][column];
-		oddCounter = new int[row][column];
+		//oddCounter = new int[row][column];
 	}
 	
 	public int getHeight() {
@@ -25,113 +26,70 @@ public class GameModel {
 	}
 	
 	public void set(int i, int j, boolean value) {
+
 		gameArray[j][i] = value;
-		oddCounter[j][i] += 1;
+		
 	}
 	
 	public boolean isOn(int i, int j) {
-		if(oddCounter[i][j]%2 == 0) {
-			return false;
-		}
-		return true;
+		return gameArray[i][j];
 	}
-	
-	public void click(int i, int j) {
-		if(i == 0 && j == 0) {
-			oddCounter[i][j] += 1;
-			oddCounter[i][j+1] += 1;
-			oddCounter[i+1][j] += 1;
-			
-			counter += 1;
+
+	public void reset(){
+		for (int i = 0; i < row; i++){
+			for (int j = 0; j < column; j++){
+				gameArray[i][j] = false; 
+			}
 		}
-		
-		if(i == 0 && j == column-1) {
-			oddCounter[i][j] += 1;
-			oddCounter[i][j-1] += 1;
-			oddCounter[i+1][j] += 1;
-			
-			counter += 1;
-		}
-		
-		if(i == row-1 && j == 0) {
-			oddCounter[i][j] += 1;
-			oddCounter[i-1][j] += 1;
-			oddCounter[i][j+1] += 1;
-			
-			counter += 1;
-		}
-		
-		if(i == row-1 && j == column-1) {
-			oddCounter[i][j] += 1;
-			oddCounter[i-1][j] += 1;
-			oddCounter[i][j-1] += 1;
-			
-			counter += 1;
-		}
-		
-		if(i == 0 && (j != 0 || j != column-1)) {
-			oddCounter[i][j] += 1;
-			oddCounter[i][j-1] += 1;
-			oddCounter[i][j+1] += 1;
-			oddCounter[i+1][j] += 1;
-			
-			counter += 1;
-		}
-		
-		if(i == row-1 && (j != 0 || j != column-1)) {
-			oddCounter[i][j] += 1;
-			oddCounter[i][j-1] += 1;
-			oddCounter[i][j+1] += 1;
-			oddCounter[i-1][j] += 1;
-			
-			counter += 1;
-		}
-		
-		if(j == 0 && (i != 0 || i != row-1)) {
-			oddCounter[i][j] += 1;
-			oddCounter[i-1][j] += 1;
-			oddCounter[i+1][j] += 1;
-			oddCounter[i][j+1] += 1;
-			
-			counter += 1;
-		}
-		
-		if(j == column-1 && (i != 0 || i != row-1)) {
-			oddCounter[i][j] += 1;
-			oddCounter[i-1][j] += 1;
-			oddCounter[i+1][j] += 1;
-			oddCounter[i][j-1] += 1;
-			
-			counter += 1;
-		}
-		
-		oddCounter[i][j] += 1;
-		oddCounter[i][j-1] += 1;
-		oddCounter[i][j+1] += 1;
-		oddCounter[i-1][j] += 1;
-		oddCounter[i+1][j] += 1;
-		
-		counter += 1;
-		
 	}
-	
-	public int getNumberOfSteps() {
-		return counter;
+
+	public void click(int i, int j){
+        set(j , i , !.isOn(i,j));
+                        
+        if ( (0 <= (j-1)) && ((j-1) < column) ){
+            set(j-1,i, !isOn(i,j-1));
+        }
+
+        if ((0 <= (j+1)) && ((j+1) < column)){
+            set(j+1,i, !isOn(i,j+1));
+        }
+
+        if ((0 <= (i-1)) && ((i-1) <= row)){
+            set(j,i-1, !isOn(i-1,j));
+        }
+
+        if ((0 <= (i+1)) && ((i+1) < row)){
+            set(j,i+1, !isOn(i+1,j));
+        }
+        
+        numberOfClicks++;
+       
 	}
-	
-	public boolean isFinished() {
-		for(int i=0;i<row;i++) {
-			for (int j=0;j<column;j++){
-				if(oddCounter[i][j] % 2 == 0) {
-					return false;
+
+	public int getNumberOfSteps(){
+		return numberOfClicks;
+	}
+
+	public boolean isFinished(){
+		for (int i = 0; i < rowl i++){
+			for (int j = 0; j < column; j++){
+				if (!gameArray[i][j]){
+					return false; 
 				}
 			}
 		}
-		return true;
 	}
-	
-	/*Need to add three more methods*/
-	
+	//randomize() method add
+
+	public void setSolution(){
+		minimal = LightsOut.solveShortest(model);
+	}
+
+	public boolean solutionSelects(int i, int j){
+		return minimal.get(i,j);
+	}
+
+
 	public String toString() {
 		String array_output = "[[";
 		for (int row = 0; row < gameArray.length; row++) {
@@ -159,4 +117,3 @@ public class GameModel {
 	}
 
 }
-

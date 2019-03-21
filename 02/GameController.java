@@ -16,7 +16,10 @@ import java.awt.event.ItemEvent;
 
 public class GameController implements ActionListener, ItemListener {
 
-    // YOUR VARIABLES HERE
+    private int width;
+    private int height; 
+    private GameModel model;
+    private GameView view; 
 
     /**
      * Constructor used for initializing the controller. It creates the game's view 
@@ -29,7 +32,10 @@ public class GameController implements ActionListener, ItemListener {
      */
     public GameController(int width, int height) {
 
-        // YOUR CODE HERE
+        this.width = width;
+        this.height = height; 
+        model = new GameModel(width,height);
+        view = new GameView (model,this);
     }
 
 
