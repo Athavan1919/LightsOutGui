@@ -57,7 +57,7 @@ public class LightsOut {
     
     public static ArrayList<Solution> solve(int width, int height){
 
-         SolutionQueue q  = new ArrayListSolutionQueue();
+        Queue<Solution> q  =new QueueImplementation<Solution>();    
         ArrayList<Solution> solutions  = new ArrayList<Solution>();
 
         q.enqueue(new Solution(width,height));
@@ -104,20 +104,28 @@ public class LightsOut {
         q.enqueue(temp);
         long start = System.currentTimeMillis();
         while(!q.isEmpty()){
-            /*
-            System.out.println("Queue is full with" + q);
-             System.out.println("");
-              System.out.println("Queue ends here");
-              */
+
             Solution s  = q.dequeue();
+            
+            /*    
+            System.out.println("");
+            System.out.println("Solution number" + counter);
+            System.out.println(s);
+            System.out.println("");
+            */
             if(s.isSuccessful(model)){
                 // by construction, it is successfull
                 System.out.println("Solution found in " + (System.currentTimeMillis()-start) + " ms" );
                 solutions.add(s);
-                //System.out.println("made it here"); 
+
             } else {
-                boolean withTrue = s.stillPossible(true,model);
-                boolean withFalse = s.stillPossible(false,model);
+                boolean withTrue = s.stillPossible(true);
+                boolean withFalse = s.stillPossible(false);
+
+                    /*
+                System.out.println(withTrue + " and " + withFalse);
+                System.out.println("Current index is " + s.currentIndex());
+                    */
                 if(withTrue && withFalse) {
                     Solution s2 = new Solution(s);
                     s.setNext(true);
@@ -136,6 +144,21 @@ public class LightsOut {
             }
         }
         return solutions;
+    }
+
+    public static Solution solveShortest(GameModel model){
+        ArrayList<Solution> solutions = solve(model);
+
+        Solution shortest = solutions.get(0);
+        
+        System.out.println("Solutions size is " + solutions.size());
+        for (int i = 0; i < solutions.size(); i++){
+            if (solutions.get(i).getSize() < shortest.getSize()){
+                shortest = solutions.get(i);
+            }
+        }
+
+        return shortest;
     }
 
 
