@@ -321,6 +321,134 @@ public class Solution {
         return (total%2)== 1 ;                
     }
 
+    public boolean stillPossible(boolean nextValue, GameModel model) {
+
+        if(currentIndex >= width*height) {
+            System.out.println("Board already full");
+            return false;
+        }
+
+        int i = currentIndex/width;
+        int j = currentIndex%width;
+        boolean before = board[i][j];
+        boolean possible = true;
+
+        board[i][j] = nextValue;
+
+        if((i > 0) && (!oddNeighborhood(i-1,j)) && !model.isOn(i-1,j)){
+            possible = false;
+        }
+        
+        else if ((i > 0) && (oddNeighborhood(i-1,j)) && model.isOn(i-1,j)){
+            possible = false;
+        }
+        
+        if(possible && (i == (height-1))) {
+            if((j > 0) && (!oddNeighborhood(i,j-1)) && !model.isOn(i,j-1)){
+                possible = false;
+            }
+            
+            else if((j > 0) && (oddNeighborhood(i,j-1)) && model.isOn(i,j-1)){
+                possible = false;
+            }
+            
+            if(possible && (j == (width-1))&& (!oddNeighborhood(i,j))&& !model.isOn(i,j)){
+                possible = false;            
+            }
+            
+            else if (possible && (j == (width-1))&& (oddNeighborhood(i,j))&& model.isOn(i,j)){
+                possible = false;
+            }
+            
+        }
+        board[i][j] = before;
+        return possible;
+
+     }
+    
+     public boolean finish(GameModel model){
+
+
+        while(!isSuccessful(model) && (currentIndex < height*width)){
+            if(this.stillPossible(true,model)){
+                setNext(true);
+            }else if (this.stillPossible(false,model)){
+                setNext(false);
+            }else{
+                return false; 
+            }
+   
+        }
+
+        return true; 
+     }
+
+     public boolean isSuccessful(GameModel model){
+        //System.out.println("old model is " + model);
+        GameModel tempModel = new GameModel( model.getWidth(),model.getHeight());
+        for (int i = 0; i < height; i++){
+            for (int j = 0; j < width; j++){
+                boolean modelValue = model.isOn(i,j);
+                tempModel.set(j,i,modelValue);
+            }
+        }
+         //System.out.println("new copied model is " + tempModel);
+
+        for (int i = 0; i < height; i++){
+            for (int j = 0; j < width; j++){
+
+                if (board[i][j] == true){
+                    tempModel.set(j,i, !tempModel.isOn(i,j));
+                                    
+                    if ( (0 <= (j-1)) && ((j-1) < width) ){
+                        tempModel.set(j-1,i, !tempModel.isOn(i,j-1));
+                    }
+
+                    if ((0 <= (j+1)) && ((j+1) < width)){
+                        tempModel.set(j+1,i, !tempModel.isOn(i,j+1));
+                    }
+
+                    if ((0 <= (i-1)) && ((i-1) <= height)){
+                        tempModel.set(j,i-1, !tempModel.isOn(i-1,j));
+                    }
+
+                    if ((0 <= (i+1)) && ((i+1) < height)){
+                        tempModel.set(j,i+1, !tempModel.isOn(i+1,j));
+                    }
+                
+                }
+            }
+        }
+        //System.out.println("modified model is " + tempModel);
+
+        for (int i = 0; i < height; i++){
+            for (int j = 0; j < width; j++){
+                if (!tempModel.isOn(i,j)){
+                    return false; 
+                }
+            }
+        }
+        return true;
+
+     }
+
+     public int getSize(){
+        int counter = 0;
+        for (int i = 0; i < height; i++){
+            for (int j = 0; j < width; j++){
+                if (board[i][j] == true){
+                    counter ++;
+                }
+            }
+        }
+        return counter; 
+     }
+
+    public boolean get(int i,int j){
+        return board[i][j];
+     }
+
+
     /**
      * returns a string representation of the solution
      *

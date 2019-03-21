@@ -51,7 +51,5 @@ public class QueueImplementation<E> implements Queue<E> {
         return (length == 0);
         
     }
-    public String toString(){
-        return queue.toString();
-    }
+
 }

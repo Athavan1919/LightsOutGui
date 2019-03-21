@@ -19,7 +19,72 @@ public class LightsOut {
     public static final int DEFAULT_HEIGTH = 8;
 
 
-    // COMPLETE THE CLASS HERE (AS PER Q1)
+    public static ArrayList<Solution> solve(GameModel model){
+
+        Queue<Solution> q  = new QueueImplementation<Solution>();
+        ArrayList<Solution> solutions  = new ArrayList<Solution>();
+
+        Solution temp = new Solution(model.getWidth(),model.getHeight());
+        //System.out.println("temp solution is " +temp);
+        q.enqueue(temp);
+        long start = System.currentTimeMillis();
+        while(!q.isEmpty()){
+
+            Solution s  = q.dequeue();
+            
+            /*    
+            System.out.println("");
+            System.out.println("Solution number" + counter);
+            System.out.println(s);
+            System.out.println("");
+            */
+            if(s.isSuccessful(model)){
+                // by construction, it is successfull
+                System.out.println("Solution found in " + (System.currentTimeMillis()-start) + " ms" );
+                solutions.add(s);
+
+            } else {
+                boolean withTrue = s.stillPossible(true);
+                boolean withFalse = s.stillPossible(false);
+
+                    /*
+                System.out.println(withTrue + " and " + withFalse);
+                System.out.println("Current index is " + s.currentIndex());
+                    */
+                if(withTrue && withFalse) {
+                    Solution s2 = new Solution(s);
+                    s.setNext(true);
+                    q.enqueue(s);
+                    s2.setNext(false);
+                    q.enqueue(s2);
+                } else if (withTrue) {
+                    if(s.finish(model)){
+                        q.enqueue(s);
+                    }                
+                } else if (withFalse) {
+                    if( s.finish(model)){
+                        q.enqueue(s); 
+                    }               
+                }
+            }
+        }
+        return solutions;
+    }
+
+    public static Solution solveShortest(GameModel model){
+        ArrayList<Solution> solutions = solve(model);
+
+        Solution shortest = solutions.get(0);
+        
+        System.out.println("Solutions size is " + solutions.size());
+        for (int i = 0; i < solutions.size(); i++){
+            if (solutions.get(i).getSize() < shortest.getSize()){
+                shortest = solutions.get(i);
+            }
+        }
+
+        return shortest;
+    }
 
 
     

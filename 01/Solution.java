@@ -291,60 +291,7 @@ public class Solution {
 
     }
 
-    /**
-     * checks if board[i][j] and its neighborhood
-     * have an odd number of values ``true''
-     */
-
-    private boolean oddNeighborhood(int i, int j) {
-        
-        if(i < 0 || i > height - 1 || j < 0 || j > width - 1) {
-            return false;
-        }
-
-        int total = 0;
-        if(board[i][j]){
-            total++;
-        }
-        if((i > 0) && (board[i-1][j])) {
-            total++;
-        }
-        if((i < height -1 ) && (board[i+1][j])) {
-            total++;
-        }
-        if((j > 0) && (board[i][j-1])) {
-            total++;
-        }
-        if((j < (width - 1)) && (board[i][j+1])) {
-            total++;
-        }
-        return (total%2)== 1 ;                
-    }
-
-    /**
-     * returns a string representation of the solution
-     *
-     * @return
-     *      the string representation
-     */
-    public String toString() {
-        StringBuffer out = new StringBuffer();
-        out.append("[");
-        for(int i = 0; i < height; i++){
-            out.append("[");
-            for(int j = 0; j < width ; j++) {
-                if (j>0) {
-                    out.append(",");
-                }
-                out.append(board[i][j]);
-            }
-            out.append("]"+(i < height -1 ? ",\n" :""));
-        }
-        out.append("]");
-        return out.toString();
-    }
-
-     public boolean stillPossible(boolean nextValue, GameModel model) {
+    public boolean stillPossible(boolean nextValue, GameModel model) {
 
         if(currentIndex >= width*height) {
             System.out.println("Board already full");
@@ -390,7 +337,6 @@ public class Solution {
      }
     
      public boolean finish(GameModel model){
-
 
         while(!isSuccessful(model) && (currentIndex < height*width)){
             if(this.stillPossible(true,model)){
@@ -466,6 +412,59 @@ public class Solution {
         }
         return counter; 
      }
+
+    /**
+     * checks if board[i][j] and its neighborhood
+     * have an odd number of values ``true''
+     */
+
+    private boolean oddNeighborhood(int i, int j) {
+        
+        if(i < 0 || i > height - 1 || j < 0 || j > width - 1) {
+            return false;
+        }
+
+        int total = 0;
+        if(board[i][j]){
+            total++;
+        }
+        if((i > 0) && (board[i-1][j])) {
+            total++;
+        }
+        if((i < height -1 ) && (board[i+1][j])) {
+            total++;
+        }
+        if((j > 0) && (board[i][j-1])) {
+            total++;
+        }
+        if((j < (width - 1)) && (board[i][j+1])) {
+            total++;
+        }
+        return (total%2)== 1 ;                
+    }
+
+    /**
+     * returns a string representation of the solution
+     *
+     * @return
+     *      the string representation
+     */
+    public String toString() {
+        StringBuffer out = new StringBuffer();
+        out.append("[");
+        for(int i = 0; i < height; i++){
+            out.append("[");
+            for(int j = 0; j < width ; j++) {
+                if (j>0) {
+                    out.append(",");
+                }
+                out.append(board[i][j]);
+            }
+            out.append("]"+(i < height -1 ? ",\n" :""));
+        }
+        out.append("]");
+        return out.toString();
+    }
 
 }
 
