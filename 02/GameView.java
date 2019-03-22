@@ -52,7 +52,8 @@ public class GameView extends JFrame {
             
             for (int row = 0; row < gameModel.getHeight(); row++) {
                 for (int column = 0; column < gameModel.getWidth(); column++) {
-                        board[row][column] = new GridButton(row, column, 1,this);
+                        board[row][column] = new GridButton(this, row, column, 1);
+                        board[row][column].addActionListener(gameController);
                         add(board[row][column]);
                 }
             }
@@ -124,10 +125,16 @@ public class GameView extends JFrame {
             // o.set(2, 1, true);
             // o.set(2, 1, true);
 
+            GameController j = new GameController(3,4);
 
+<<<<<<< HEAD
             GameController controller = new GameController(o.getWidth(),o.getHeight());
             GameView z = new GameView(o,controller);
+=======
+            GameView z = new GameView(o,j);
+>>>>>>> baccb43c222d1331adbac482778695cbb8ce1ffc
             z.update();
     }
 
 }
+
