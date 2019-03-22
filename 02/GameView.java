@@ -45,20 +45,21 @@ public class GameView extends JFrame {
             setResizable(true);
             setDefaultCloseOperation(EXIT_ON_CLOSE);
             setBackground(Color.WHITE);
-            
-
             this.gameModel = gameModel;
-            setLayout(new GridLayout(gameModel.getHeight(), gameModel.getWidth()));
-            //setBorder(BorderFactory.createEmptyBorder(20, 20, 0, 20));
+            
+            JPanel panelOne = new JPanel();
+            panelOne.setLayout(new GridLayout(gameModel.getHeight(), gameModel.getWidth()));
+            panelOne.setBorder(BorderFactory.createEmptyBorder(20, 20, 0, 20));
             board = new GridButton[gameModel.getHeight()][gameModel.getWidth()];
             
               for (int row = 0; row < gameModel.getHeight(); row++) {
                 for (int column = 0; column < gameModel.getWidth(); column++) {
                         board[row][column] = new GridButton(row, column, 1,this);
                         board[row][column].addActionListener(gameController);
-                        add(board[row][column]);
+                        panelOne.add(board[row][column]);
                 }
             }
+            add(panelOne,BorderLayout.CENTER);
 
             JPanel panelTwo = new JPanel();
             panelTwo.setLayout(new GridLayout(4,1));
