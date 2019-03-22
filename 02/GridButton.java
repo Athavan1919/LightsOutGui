@@ -102,7 +102,7 @@ public class GridButton extends JButton {
             }
             if (icons[id] == null) {
                 String strId = Integer.toString(id);
-                icons[id] = new ImageIcon(this.getClass().getResource("Light-"+ strId + ".png"));
+                icons[id] = new ImageIcon(this.getClass().getResource("Icons/Light-"+ strId + ".png"));
             }
             return icons[id];
         }

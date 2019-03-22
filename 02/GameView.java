@@ -51,7 +51,7 @@ public class GameView extends JFrame {
             
             for (int row = 0; row < gameModel.getHeight(); row++) {
                 for (int column = 0; column < gameModel.getWidth(); column++) {
-                        board[row][column] = new GridButton(this, row, column, 1);
+                        board[row][column] = new GridButton(row, column, 1,this);
                         add(board[row][column]);
                 }
             }
@@ -71,7 +71,7 @@ public class GameView extends JFrame {
         for (int row = 0; row < gameModel.getHeight(); row++) {
             for (int column = 0; column < gameModel.getWidth(); column++) {
                     if(gameModel.isOn(row, column)) {
-                        board[row][column] = new GridButton(this, row, column, 0);
+                        board[row][column] = new GridButton( row, column, 0, this);
                         add(board[row][column]);
                     }
             }
@@ -88,8 +88,8 @@ public class GameView extends JFrame {
      */
 
     public boolean solutionShown(){
-
-        // YOUR CODE HERE
+            //TODO: Fix this
+        return true;
 
     }
     

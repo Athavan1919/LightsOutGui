@@ -14,7 +14,7 @@ public class GameModel {
 		row = height;
 		column = width;
 		gameArray = new boolean[row][column];
-		//oddCounter = new int[row][column];
+
 	}
 	
 	public int getHeight() {
