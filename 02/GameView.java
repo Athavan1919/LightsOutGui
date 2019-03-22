@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
+import java.awt.BorderLayout;
 
 import javax.swing.JPanel;
 
@@ -26,7 +27,6 @@ public class GameView extends JFrame {
     
     private GridButton[][] board;
     
-    JPanel p = new JPanel();
 
     /**
      * Constructor used for initializing the Frame
@@ -40,7 +40,7 @@ public class GameView extends JFrame {
     public GameView(GameModel gameModel/*, GameController gameController*/) {
             super("Light Out -- The ITI 1121 version");
             setSize(400,400);
-            setResizable(false);
+            setResizable(true);
             setDefaultCloseOperation(EXIT_ON_CLOSE);
             setBackground(Color.WHITE);
 
@@ -55,6 +55,18 @@ public class GameView extends JFrame {
                         add(board[row][column]);
                 }
             }
+            JPanel panelTwo = new JPanel();
+            panelTwo.setBackground(Color.white);
+            add(panelTwo,BorderLayout.CENTER);
+
+            Button reset = new Button("Reset");
+            Button random = new Button("Random");
+            Button quit = new Button ("Quit");
+            
+            panelTwo.add(reset);
+            panelTwo.add(random);
+            panelTwo.add(quit);
+
 
             setVisible(true);
     }
@@ -96,10 +108,11 @@ public class GameView extends JFrame {
     
     public static void main(String[] args) {
             GameModel o = new GameModel(3,4);
-            o.set(0, 2, true);
-            o.set(0, 1, true);
-            o.set(2, 1, true);
-            o.set(2, 1, true);
+            o.click(0, 2);
+            o.click(1,2);
+            // o.set(0, 1, true);
+            // o.set(2, 1, true);
+            // o.set(2, 1, true);
 
 
 

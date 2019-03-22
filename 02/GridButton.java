@@ -66,7 +66,8 @@ public class GridButton extends JButton {
         
             this.isOn = isOn;
             this.isClicked = isClicked;
-            setIcon(getImageIcon());            
+           
+            setIcon( getImageIcon());            
 
     }
 
@@ -96,7 +97,7 @@ public class GridButton extends JButton {
                 
             int id;
             if (isOn) {
-                id = NUM_STATE + 1;
+                id = 0;
             } else {
                 id = type;
             }
