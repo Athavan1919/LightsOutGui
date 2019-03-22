@@ -19,7 +19,8 @@ public class GameController implements ActionListener, ItemListener {
     private int width;
     private int height; 
     private GameModel model;
-    private GameView view; 
+    private GameView view;
+    private boolean allowsClicks = false;
 
     /**
      * Constructor used for initializing the controller. It creates the game's view 
@@ -49,7 +50,26 @@ public class GameController implements ActionListener, ItemListener {
 
     public void actionPerformed(ActionEvent e) {
         
-        // YOUR CODE HERE
+            if(e.getSource() instanceof GridButton) {
+                
+                GridButton src = (GridButton) e.getSource();
+                
+                if(src.getType() == 1 || src.getType() == 0) {
+                
+                    //setAllowsClicks(false);
+
+                    int row = src.getRow(), column = src.getColumn();
+                    model.click(row,column);
+                    src.setState(model.isOn(row, column), true);
+
+                    
+                    //if(!src.selected()) {
+                    //  model.click(row, column);
+                    //}
+                    
+                }
+                
+            }
 
     }
 
@@ -66,6 +86,11 @@ public class GameController implements ActionListener, ItemListener {
         // YOU CODE HERE
     }
 
-    // YOUR OTHER METHODS HERE
-
+    public boolean allowsClicks() {
+            return allowsClicks;
+    }
+    
+    public void setAllowsClicks(boolean allowClicks) {
+            this.allowsClicks = allowClicks;
+    }
 }
