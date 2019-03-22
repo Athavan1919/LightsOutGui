@@ -35,7 +35,7 @@ public class GameController implements ActionListener, ItemListener {
         this.width = width;
         this.height = height; 
         model = new GameModel(width,height);
-        view = new GameView (model,this);
+        view = new GameView(model,this);
     }
 
 

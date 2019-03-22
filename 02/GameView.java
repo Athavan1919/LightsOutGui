@@ -37,12 +37,13 @@ public class GameView extends JFrame {
      *            the controller
      */
 
-    public GameView(GameModel gameModel/*, GameController gameController*/) {
+    public GameView(GameModel gameModel, GameController gameController) {
             super("Light Out -- The ITI 1121 version");
             setSize(400,400);
             setResizable(true);
             setDefaultCloseOperation(EXIT_ON_CLOSE);
             setBackground(Color.WHITE);
+            
 
             this.gameModel = gameModel;
             setLayout(new GridLayout(gameModel.getHeight(), gameModel.getWidth()));
@@ -55,20 +56,29 @@ public class GameView extends JFrame {
                         add(board[row][column]);
                 }
             }
+
             JPanel panelTwo = new JPanel();
+            panelTwo.setLayout(new GridLayout(4,1));
             panelTwo.setBackground(Color.white);
-            add(panelTwo,BorderLayout.CENTER);
 
             Button reset = new Button("Reset");
+            reset.addActionListener(gameController);
             Button random = new Button("Random");
+            random.addActionListener(gameController);
             Button quit = new Button ("Quit");
-            
-            panelTwo.add(reset);
-            panelTwo.add(random);
-            panelTwo.add(quit);
+            quit.addActionListener(gameController);
 
+            JCheckBox solution = new JCheckBox("solution",false);
+
+            panelTwo.add(reset,BorderLayout.EAST);
+            panelTwo.add(random,BorderLayout.EAST);
+            panelTwo.add(solution,BorderLayout.EAST);
+            panelTwo.add(quit,BorderLayout.EAST);
+            
+            add(panelTwo,BorderLayout.EAST);
 
             setVisible(true);
+
     }
 
     /**
@@ -107,16 +117,16 @@ public class GameView extends JFrame {
     }
     
     public static void main(String[] args) {
-            GameModel o = new GameModel(3,4);
+            GameModel o = new GameModel(3,3);
             o.click(0, 2);
-            o.click(1,2);
+            //o.click(1,2);
             // o.set(0, 1, true);
             // o.set(2, 1, true);
             // o.set(2, 1, true);
 
 
-
-            GameView z = new GameView(o);
+            GameController controller = new GameController(o.getWidth(),o.getHeight());
+            GameView z = new GameView(o,controller);
             z.update();
     }
 
