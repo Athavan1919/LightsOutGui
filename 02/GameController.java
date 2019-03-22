@@ -16,8 +16,8 @@ import java.awt.event.ItemEvent;
 
 public class GameController implements ActionListener, ItemListener {
 
-    private int width;
-    private int height; 
+    private int row;
+    private int column; 
     private GameModel model;
     private GameView view;
     private boolean allowsClicks = false;
@@ -33,9 +33,9 @@ public class GameController implements ActionListener, ItemListener {
      */
     public GameController(int width, int height) {
 
-        this.width = width;
-        this.height = height; 
-        model = new GameModel(width,height);
+        row = height;
+        column = width; 
+        model = new GameModel(height,width);
         view = new GameView(model,this);
     }
 
@@ -54,22 +54,39 @@ public class GameController implements ActionListener, ItemListener {
                 
                 GridButton src = (GridButton) e.getSource();
                 
-                if(src.getType() == 1 || src.getType() == 0) {
+                //if(src.getType() == 1 || src.getType() == 0) {
                 
                     //setAllowsClicks(false);
 
-                    int row = src.getRow(), column = src.getColumn();
+                    int row = src.getRow();
+                    int column = src.getColumn();
                     model.click(row,column);
-                    src.setState(model.isOn(row, column), true);
+                    model.setSolution();
+                    src.setState(model.isOn(row, column), model.solutionSelects(row,column));
 
                     
                     //if(!src.selected()) {
                     //  model.click(row, column);
                     //}
                     
-                }
+                //}
                 
+            }else if (e.getActionCommand().equals("Reset")){
+                model.reset();
+                System.out.println(model);
+                System.out.println("");
+            }else if(e.getActionCommand().equals("Random")){
+                model.randomize();
+                System.out.println(model);
+                System.out.println("");
+            }else if(e.getActionCommand().equals("Quit")){
+                System.exit(0);
+            }else{
+                System.err.println("Unknown Action");
+                System.exit(0);
             }
+
+            view.update();
 
     }
 
@@ -83,14 +100,12 @@ public class GameController implements ActionListener, ItemListener {
 
     public void  itemStateChanged(ItemEvent e){
 
-        // YOU CODE HERE
+        if (e.getStateChange() == 1){
+            model.setSolution();
+            System.out.println("Solution selected");
+        }
+        view.update();
     }
 
-    public boolean allowsClicks() {
-            return allowsClicks;
-    }
-    
-    public void setAllowsClicks(boolean allowClicks) {
-            this.allowsClicks = allowClicks;
-    }
+
 }

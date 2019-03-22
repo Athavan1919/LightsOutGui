@@ -36,7 +36,7 @@ public class GridButton extends JButton {
      *            the row of this Cell
      */
 
-    public GridButton(int column, int row, int type, GameView board) {
+    public GridButton(int row, int column, int type, GameView board) {
             
             this.column = column;
             this.row = row;
@@ -51,7 +51,7 @@ public class GridButton extends JButton {
 
     }
     
-    public GridButton(int column, int row, GameView board) {
+    public GridButton(int row, int column, GameView board) {
             this(column, row, generator.nextInt(NUM_STATE), board);
     }
 
@@ -98,7 +98,13 @@ public class GridButton extends JButton {
             int id;
             if (isOn) {
                 id = 0;
-            } else {
+            }else if(!isOn){
+                id = 1;
+            }else if (isOn && isClicked){
+                id = 2;
+            }else if (!isOn && isClicked){
+                id = 3;
+            }else{
                 id = type;
             }
             if (icons[id] == null) {

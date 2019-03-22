@@ -26,6 +26,8 @@ public class GameView extends JFrame {
     private GameModel gameModel;
     
     private GridButton[][] board;
+
+    private JCheckBox solution;
     
 
     /**
@@ -50,9 +52,9 @@ public class GameView extends JFrame {
             //setBorder(BorderFactory.createEmptyBorder(20, 20, 0, 20));
             board = new GridButton[gameModel.getHeight()][gameModel.getWidth()];
             
-            for (int row = 0; row < gameModel.getHeight(); row++) {
+              for (int row = 0; row < gameModel.getHeight(); row++) {
                 for (int column = 0; column < gameModel.getWidth(); column++) {
-                        board[row][column] = new GridButton(this, row, column, 1);
+                        board[row][column] = new GridButton(row, column, 1,this);
                         board[row][column].addActionListener(gameController);
                         add(board[row][column]);
                 }
@@ -69,7 +71,7 @@ public class GameView extends JFrame {
             Button quit = new Button ("Quit");
             quit.addActionListener(gameController);
 
-            JCheckBox solution = new JCheckBox("solution",false);
+            solution = new JCheckBox("solution",false);
 
             panelTwo.add(reset,BorderLayout.EAST);
             panelTwo.add(random,BorderLayout.EAST);
@@ -90,14 +92,11 @@ public class GameView extends JFrame {
     public void update(){
         
         //setBorder(BorderFactory.createEmptyBorder(20, 20, 0, 20));
-
+        gameModel.setSolution();
         for (int row = 0; row < gameModel.getHeight(); row++) {
             for (int column = 0; column < gameModel.getWidth(); column++) {
-                    if(gameModel.isOn(row, column)) {
-
-                        board[row][column].setState(true, true);
-
-                    }
+                    
+                    board[row][column].setState(gameModel.isOn(row,column), gameModel.solutionSelects(row,column));
             }
         }
 
@@ -113,28 +112,10 @@ public class GameView extends JFrame {
 
     public boolean solutionShown(){
             //TODO: Fix this
-        return true;
+        return solution.isSelected();
 
     }
-    
-    public static void main(String[] args) {
-            GameModel o = new GameModel(3,3);
-            o.click(0, 2);
-            //o.click(1,2);
-            // o.set(0, 1, true);
-            // o.set(2, 1, true);
-            // o.set(2, 1, true);
 
-            GameController j = new GameController(3,4);
-
-<<<<<<< HEAD
-            GameController controller = new GameController(o.getWidth(),o.getHeight());
-            GameView z = new GameView(o,controller);
-=======
-            GameView z = new GameView(o,j);
->>>>>>> baccb43c222d1331adbac482778695cbb8ce1ffc
-            z.update();
-    }
 
 }
 

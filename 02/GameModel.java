@@ -81,10 +81,10 @@ public class GameModel {
 		return true;
 	}
 	public void randomize(){
-		this.reset();
+		reset();
 		for (int i = 0; i < row; i++){
 			for (int j = 0; j < column; j++){
-				this.set(i,j, Math.random() <0.5);
+				this.set(j,i, Math.random() <0.5);
 			}
 		}
 	}
