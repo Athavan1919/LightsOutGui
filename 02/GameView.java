@@ -37,7 +37,7 @@ public class GameView extends JFrame {
      *            the controller
      */
 
-    public GameView(GameModel gameModel/*, GameController gameController*/) {
+    public GameView(GameModel gameModel, GameController gameController) {
             super("Light Out -- The ITI 1121 version");
             setSize(400,400);
             setResizable(true);
@@ -51,7 +51,8 @@ public class GameView extends JFrame {
             
             for (int row = 0; row < gameModel.getHeight(); row++) {
                 for (int column = 0; column < gameModel.getWidth(); column++) {
-                        board[row][column] = new GridButton(row, column, 1,this);
+                        board[row][column] = new GridButton(this, row, column, 1);
+                        board[row][column].addActionListener(gameController);
                         add(board[row][column]);
                 }
             }
@@ -114,10 +115,11 @@ public class GameView extends JFrame {
             // o.set(2, 1, true);
             // o.set(2, 1, true);
 
+            GameController j = new GameController(3,4);
 
-
-            GameView z = new GameView(o);
+            GameView z = new GameView(o,j);
             z.update();
     }
 
 }
+
