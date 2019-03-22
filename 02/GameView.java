@@ -72,6 +72,7 @@ public class GameView extends JFrame {
             quit.addActionListener(gameController);
 
             solution = new JCheckBox("solution",false);
+            solution.addItemListener(gameController);
 
             panelTwo.add(reset,BorderLayout.EAST);
             panelTwo.add(random,BorderLayout.EAST);
@@ -92,11 +93,18 @@ public class GameView extends JFrame {
     public void update(){
         
         //setBorder(BorderFactory.createEmptyBorder(20, 20, 0, 20));
-        gameModel.setSolution();
+        if (solutionShown()){
+            gameModel.setSolution();
+            for (int row = 0; row < gameModel.getHeight(); row++) {
+                for (int column = 0; column < gameModel.getWidth(); column++) {
+                    board[row][column].setState(gameModel.isOn(row,column), gameModel.solutionSelects(row,column));
+                }
+            }
+        }
         for (int row = 0; row < gameModel.getHeight(); row++) {
             for (int column = 0; column < gameModel.getWidth(); column++) {
                     
-                    board[row][column].setState(gameModel.isOn(row,column), gameModel.solutionSelects(row,column));
+                    board[row][column].setState(gameModel.isOn(row,column), false);
             }
         }
 
@@ -115,6 +123,9 @@ public class GameView extends JFrame {
         return solution.isSelected();
 
     }
+    // public boolean setSolution(boolean value){
+    //     solution.
+    // }
 
 
 }

@@ -100,7 +100,8 @@ public class GameController implements ActionListener, ItemListener {
 
     public void  itemStateChanged(ItemEvent e){
 
-        if (e.getStateChange() == 1){
+
+        if (e.getStateChange() ==1){
             model.setSolution();
             System.out.println("Solution selected");
         }
