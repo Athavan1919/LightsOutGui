@@ -353,51 +353,23 @@ public class Solution {
      }
 
      public boolean isSuccessful(GameModel model){
-        //System.out.println("old model is " + model);
-        GameModel tempModel = new GameModel( model.getWidth(),model.getHeight());
-        for (int i = 0; i < height; i++){
-            for (int j = 0; j < width; j++){
-                boolean modelValue = model.isOn(i,j);
-                tempModel.set(j,i,modelValue);
-            }
+        if(currentIndex < width*height) {
+           //System.out.println("Board not finished");
+            return false;
         }
-         //System.out.println("new copied model is " + tempModel);
 
-        for (int i = 0; i < height; i++){
-            for (int j = 0; j < width; j++){
-
-                if (board[i][j] == true){
-                    tempModel.set(j,i, !tempModel.isOn(i,j));
-                                    
-                    if ( (0 <= (j-1)) && ((j-1) < width) ){
-                        tempModel.set(j-1,i, !tempModel.isOn(i,j-1));
-                    }
-
-                    if ((0 <= (j+1)) && ((j+1) < width)){
-                        tempModel.set(j+1,i, !tempModel.isOn(i,j+1));
-                    }
-
-                    if ((0 <= (i-1)) && ((i-1) <= height)){
-                        tempModel.set(j,i-1, !tempModel.isOn(i-1,j));
-                    }
-
-                    if ((0 <= (i+1)) && ((i+1) < height)){
-                        tempModel.set(j,i+1, !tempModel.isOn(i+1,j));
-                    }
-                
+        for(int i = 0; i < height ; i++){
+            for(int j = 0; j < width; j++) {
+                if(!oddNeighborhood(i,j) && !model.isOn(i,j)){
+                    return false;
                 }
-            }
-        }
-        //System.out.println("modified model is " + tempModel);
-
-        for (int i = 0; i < height; i++){
-            for (int j = 0; j < width; j++){
-                if (!tempModel.isOn(i,j)){
-                    return false; 
+                if(oddNeighborhood(i,j) && model.isOn(i,j)){
+                    return false;
                 }
             }
         }
         return true;
+
 
      }
 

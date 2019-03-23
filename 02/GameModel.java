@@ -82,9 +82,8 @@ public class GameModel {
 		return true;
 	}
 	public void randomize(){
-		reset();
-		for (int i = 0; i < row; i++){
-			for (int j = 0; j < column; j++){
+		for (int i=0; i < row; i++){
+			for (int j=0; j < column; j++){
 				this.set(j,i, Math.random() <0.5);
 			}
 		}

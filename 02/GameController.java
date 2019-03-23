@@ -63,6 +63,7 @@ public class GameController implements ActionListener, ItemListener {
                     src.setState(model.isOn(row, column), model.solutionSelects(row,column));
                     
                     model.getNumberOfSteps();
+                    System.out.println("Number of clicks is: " + model.getNumberOfSteps());
                     
        
 
@@ -78,6 +79,7 @@ public class GameController implements ActionListener, ItemListener {
             
             }else if(e.getActionCommand().equals("Random")){
                 model.randomize();
+                model.setSolution();
                 System.out.println("");
                 System.out.println("Random model is: ");
                 System.out.println(model);

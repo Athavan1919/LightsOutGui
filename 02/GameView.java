@@ -30,8 +30,8 @@ public class GameView extends JFrame {
     private JCheckBox solution;
     
     private JLabel label;
-    
-    private GameController gameController;
+
+    private GridButton steps;
     
 
     /**
@@ -52,6 +52,7 @@ public class GameView extends JFrame {
             this.gameModel = gameModel;
             
             JPanel panelOne = new JPanel();
+            panelOne.setBackground(Color.white);
             panelOne.setLayout(new GridLayout(gameModel.getHeight(), gameModel.getWidth()));
             panelOne.setBorder(BorderFactory.createEmptyBorder(20, 20, 0, 20));
             board = new GridButton[gameModel.getHeight()][gameModel.getWidth()];
@@ -65,19 +66,25 @@ public class GameView extends JFrame {
             }
             add(panelOne,BorderLayout.CENTER);
 
-            JPanel panelTwo = new JPanel();
+            JPanel panelTwo = new JPanel(new BorderLayout());
             panelTwo.setLayout(new GridLayout(4,1));
             panelTwo.setBackground(Color.white);
 
             Button reset = new Button("Reset");
             reset.addActionListener(gameController);
+            reset.setBackground(Color.WHITE);
+            
             Button random = new Button("Random");
             random.addActionListener(gameController);
+            random.setBackground(Color.WHITE);
+            
             Button quit = new Button ("Quit");
             quit.addActionListener(gameController);
+            quit.setBackground(Color.WHITE);
 
             solution = new JCheckBox("solution",false);
             solution.addItemListener(gameController);
+            solution.setBackground(Color.WHITE);
 
             panelTwo.add(reset,BorderLayout.EAST);
             panelTwo.add(random,BorderLayout.EAST);
@@ -88,12 +95,13 @@ public class GameView extends JFrame {
             
             
             JPanel panelThree = new JPanel();
+            panelThree.setBackground(Color.white);
             panelThree.setLayout(new GridLayout(4,1));
             panelThree.setBackground(Color.white);
 
             //JLabel label = new JLabel("Number of steps:");
             label = new JLabel("Number of steps:");
-            panelThree.add(label,BorderLayout.SOUTH);
+            panelThree.add(label,BorderLayout.CENTER);
             add(panelThree,BorderLayout.SOUTH);
 
 

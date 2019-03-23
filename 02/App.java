@@ -3,8 +3,5 @@ public class App{
 
         GameController j = new GameController(3,3);
 
-     
-
-
     }
 }
