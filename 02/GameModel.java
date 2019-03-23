@@ -41,6 +41,7 @@ public class GameModel {
 				gameArray[i][j] = false; 
 			}
 		}
+		numberOfClicks = 0;
 	}
 
 	public void click(int i, int j){
@@ -98,7 +99,10 @@ public class GameModel {
 	public boolean solutionSelects(int i, int j){
 		return minimal.get(i,j);
 	}
-
+	
+	public String NumberOfSteps(){
+		return "Number of steps: " + getNumberOfSteps();
+	}
 
 	public String toString() {
 		String array_output = "[[";

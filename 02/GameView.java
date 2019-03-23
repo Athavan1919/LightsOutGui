@@ -29,6 +29,10 @@ public class GameView extends JFrame {
 
     private JCheckBox solution;
     
+    private JLabel label;
+    
+    private GameController gameController;
+    
 
     /**
      * Constructor used for initializing the Frame
@@ -81,6 +85,17 @@ public class GameView extends JFrame {
             panelTwo.add(quit,BorderLayout.EAST);
             
             add(panelTwo,BorderLayout.EAST);
+            
+            
+            JPanel panelThree = new JPanel();
+            panelThree.setLayout(new GridLayout(4,1));
+            panelThree.setBackground(Color.white);
+
+            //JLabel label = new JLabel("Number of steps:");
+            label = new JLabel("Number of steps:");
+            panelThree.add(label,BorderLayout.SOUTH);
+            add(panelThree,BorderLayout.SOUTH);
+
 
             setVisible(true);
 
@@ -97,13 +112,20 @@ public class GameView extends JFrame {
             for (int row = 0; row < gameModel.getHeight(); row++) {
                 for (int column = 0; column < gameModel.getWidth(); column++) {
                     board[row][column].setState(gameModel.isOn(row,column), gameModel.solutionSelects(row,column));
+                    label.setText(gameModel.NumberOfSteps());
+
                 }
             }
+     
+            
         }else{
             for (int row = 0; row < gameModel.getHeight(); row++) {
                 for (int column = 0; column < gameModel.getWidth(); column++) {
                     
                     board[row][column].setState(gameModel.isOn(row,column), false);
+                    label.setText(gameModel.NumberOfSteps());
+
+
                 }
             }
 
@@ -124,10 +146,11 @@ public class GameView extends JFrame {
         return solution.isSelected();
 
     }
-    // public boolean setSolution(boolean value){
-    //     solution = 
-    // }
-
-
+ 
 }
+
+
+
+
+
 
