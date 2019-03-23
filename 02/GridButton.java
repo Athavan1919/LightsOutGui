@@ -63,7 +63,6 @@ public class GridButton extends JButton {
     * tapped in the model's current solution
     */ 
     public void setState(boolean isOn, boolean isClicked) {
-        
             this.isOn = isOn;
             this.isClicked = isClicked;
            
@@ -96,18 +95,21 @@ public class GridButton extends JButton {
     private ImageIcon getImageIcon() {
                 
             int id;
-            if (isOn) {
-                id = 0;
-            }else if(!isOn){
-                id = 1;
-            }else if (isOn && isClicked){
+            if (isOn && isClicked) {
                 id = 2;
-            }else if (!isOn && isClicked){
+            }else if(!isOn && isClicked){
                 id = 3;
+            }else if (isOn ){
+                id = 0;
+            }else if (!isOn ){
+                id = 1;
             }else{
                 id = type;
             }
             if (icons[id] == null) {
+                String strId = Integer.toString(id);
+                icons[id] = new ImageIcon(this.getClass().getResource("Icons/Light-"+ strId + ".png"));
+            }else{
                 String strId = Integer.toString(id);
                 icons[id] = new ImageIcon(this.getClass().getResource("Icons/Light-"+ strId + ".png"));
             }

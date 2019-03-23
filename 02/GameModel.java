@@ -91,7 +91,8 @@ public class GameModel {
 
 	public void setSolution(){
 		minimal = LightsOut.solveShortest(this);
-		System.out.println (minimal);
+		System.out.println("Solution is: ");
+		System.out.println(minimal);
 	}
 
 	public boolean solutionSelects(int i, int j){

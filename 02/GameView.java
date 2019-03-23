@@ -93,20 +93,20 @@ public class GameView extends JFrame {
 
     public void update(){
         
-        //setBorder(BorderFactory.createEmptyBorder(20, 20, 0, 20));
         if (solutionShown()){
-            gameModel.setSolution();
             for (int row = 0; row < gameModel.getHeight(); row++) {
                 for (int column = 0; column < gameModel.getWidth(); column++) {
                     board[row][column].setState(gameModel.isOn(row,column), gameModel.solutionSelects(row,column));
                 }
             }
-        }
-        for (int row = 0; row < gameModel.getHeight(); row++) {
-            for (int column = 0; column < gameModel.getWidth(); column++) {
+        }else{
+            for (int row = 0; row < gameModel.getHeight(); row++) {
+                for (int column = 0; column < gameModel.getWidth(); column++) {
                     
                     board[row][column].setState(gameModel.isOn(row,column), false);
+                }
             }
+
         }
 
         setVisible(true);
@@ -125,7 +125,7 @@ public class GameView extends JFrame {
 
     }
     // public boolean setSolution(boolean value){
-    //     solution.
+    //     solution = 
     // }
 
 

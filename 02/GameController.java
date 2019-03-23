@@ -19,7 +19,7 @@ public class GameController implements ActionListener, ItemListener {
     private int row;
     private int column; 
     private GameModel model;
-    private GameView view;
+    public GameView view;
     private boolean allowsClicks = false;
 
     /**
@@ -73,12 +73,18 @@ public class GameController implements ActionListener, ItemListener {
                 
             }else if (e.getActionCommand().equals("Reset")){
                 model.reset();
+                System.out.println("");
+                System.out.println("Model has been reset: ");
                 System.out.println(model);
                 System.out.println("");
+            
             }else if(e.getActionCommand().equals("Random")){
                 model.randomize();
+                System.out.println("");
+                System.out.println("Random model is: ");
                 System.out.println(model);
                 System.out.println("");
+
             }else if(e.getActionCommand().equals("Quit")){
                 System.exit(0);
             }else{
@@ -103,7 +109,6 @@ public class GameController implements ActionListener, ItemListener {
 
         if (e.getStateChange() ==1){
             model.setSolution();
-            System.out.println("Solution selected");
         }
         view.update();
     }
