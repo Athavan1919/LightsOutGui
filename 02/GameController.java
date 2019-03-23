@@ -2,10 +2,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
+
+
+
+// YOUR OTHER IMPORTS HERE IF NEEDE
 import javax.swing.JOptionPane;
-
-// YOUR OTHER IMPORTS HERE IF NEEDED
-
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 /**
  * The class <b>GameController</b> is the controller of the game. It is a listener
  * of the view, and has a method <b>play</b> which computes the next
@@ -50,7 +54,7 @@ public class GameController implements ActionListener, ItemListener {
      */
 
     public void actionPerformed(ActionEvent e) {
-        
+
             if(e.getSource() instanceof GridButton) {
                 
                 GridButton src = (GridButton) e.getSource();
@@ -64,13 +68,9 @@ public class GameController implements ActionListener, ItemListener {
                     
                     model.getNumberOfSteps();
                     System.out.println("Number of clicks is: " + model.getNumberOfSteps());
-                    
-       
 
-                    
-      
                 
-            }else if (e.getActionCommand().equals("Reset")||e.getActionCommand().equals("Play Again")){
+            }else if (e.getActionCommand().equals("Reset")){
                 model.reset();
                 System.out.println("");
                 System.out.println("Model has been reset: ");
@@ -94,6 +94,26 @@ public class GameController implements ActionListener, ItemListener {
 
             view.update();
 
+            if(model.isFinished()) {
+                JFrame f=new JFrame();  
+                Object[] options = {"Play Again", "Quit"};
+                int exitOrplay = JOptionPane.showOptionDialog(f,"Congratulations, you won in " + model.getNumberOfSteps() + 
+                        " steps! Would you like to play again?", "Won", JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        options,
+                        options[1]);  
+
+                if (exitOrplay == 0){
+                    model.reset();
+                    view.update();
+                }
+                if (exitOrplay == 1){
+                    System.exit(0);
+                }
+
+            }
+
     }
 
     /**
@@ -112,6 +132,7 @@ public class GameController implements ActionListener, ItemListener {
         }
         view.update();
     }
+
 
 
 }

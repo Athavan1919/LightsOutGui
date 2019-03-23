@@ -104,7 +104,6 @@ public class GameView extends JFrame {
             panelThree.add(label,BorderLayout.CENTER);
             add(panelThree,BorderLayout.SOUTH);
 
-
             setVisible(true);
 
     }
@@ -125,19 +124,6 @@ public class GameView extends JFrame {
                 }
             }
             
-            if(gameModel.isFinished()) {
-                    JFrame f=new JFrame();  
-                    Object[] options = {"Play Again", "Quit"};
-                    JOptionPane.showOptionDialog(f,"Congratulations, you won in " + gameModel.getNumberOfSteps() + 
-                            " steps! Would you like to play again?", "Won", JOptionPane.YES_NO_CANCEL_OPTION,
-                            JOptionPane.QUESTION_MESSAGE,
-                            null,
-                            options,
-                            options[1]);  
-                
-            }
-     
-            
         }else{
             for (int row = 0; row < gameModel.getHeight(); row++) {
                 for (int column = 0; column < gameModel.getWidth(); column++) {
@@ -148,18 +134,6 @@ public class GameView extends JFrame {
                 }
             }
             
-            if(gameModel.isFinished()) {
-                JFrame f=new JFrame();  
-                Object[] options = {"Play Again","Quit"};
-                JOptionPane.showOptionDialog(f,"Congratulations, you won in " + gameModel.getNumberOfSteps() + 
-                        " steps! Would you like to play again?", "Won", JOptionPane.YES_NO_CANCEL_OPTION,
-                        JOptionPane.QUESTION_MESSAGE,
-                        null,
-                        options,
-                        options[1]);  
-            
-        }
-
         }
 
         setVisible(true);
