@@ -55,24 +55,21 @@ public class GameController implements ActionListener, ItemListener {
                 
                 GridButton src = (GridButton) e.getSource();
                 
-                //if(src.getType() == 1 || src.getType() == 0) {
-                
-                    //setAllowsClicks(false);
 
                     int row = src.getRow();
                     int column = src.getColumn();
                     model.click(row,column);
                     model.setSolution();
                     src.setState(model.isOn(row, column), model.solutionSelects(row,column));
+                    
+                    model.getNumberOfSteps();
+                    
+       
 
                     
-                    //if(!src.selected()) {
-                    //  model.click(row, column);
-                    //}
-                    
-                //}
+      
                 
-            }else if (e.getActionCommand().equals("Reset")){
+            }else if (e.getActionCommand().equals("Reset")||e.getActionCommand().equals("Play Again")){
                 model.reset();
                 System.out.println("");
                 System.out.println("Model has been reset: ");
