@@ -116,6 +116,18 @@ public class GameView extends JFrame {
 
                 }
             }
+            
+            if(gameModel.isFinished()) {
+                    JFrame f=new JFrame();  
+                    Object[] options = {"Play Again", "Quit"};
+                    JOptionPane.showOptionDialog(f,"Congratulations, you won in " + gameModel.getNumberOfSteps() + 
+                            " steps! Would you like to play again?", "Won", JOptionPane.YES_NO_CANCEL_OPTION,
+                            JOptionPane.QUESTION_MESSAGE,
+                            null,
+                            options,
+                            options[1]);  
+                
+            }
      
             
         }else{
@@ -125,9 +137,20 @@ public class GameView extends JFrame {
                     board[row][column].setState(gameModel.isOn(row,column), false);
                     label.setText(gameModel.NumberOfSteps());
 
-
                 }
             }
+            
+            if(gameModel.isFinished()) {
+                JFrame f=new JFrame();  
+                Object[] options = {"Play Again","Quit"};
+                JOptionPane.showOptionDialog(f,"Congratulations, you won in " + gameModel.getNumberOfSteps() + 
+                        " steps! Would you like to play again?", "Won", JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        options,
+                        options[1]);  
+            
+        }
 
         }
 
@@ -148,6 +171,8 @@ public class GameView extends JFrame {
     }
  
 }
+
+
 
 
 
