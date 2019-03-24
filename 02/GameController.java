@@ -7,8 +7,6 @@ import java.awt.event.ItemEvent;
 
 // YOUR OTHER IMPORTS HERE IF NEEDE
 import javax.swing.JOptionPane;
-import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
 /**
  * The class <b>GameController</b> is the controller of the game. It is a listener
@@ -21,11 +19,13 @@ import javax.swing.*;
 
 public class GameController implements ActionListener, ItemListener {
 
+    public static final int DEFAULT_COLUMN = 10;
+    public static final int DEFAULT_ROW = 8;
+
     private int row;
     private int column; 
     private GameModel model;
     public GameView view;
-    private boolean allowsClicks = false;
 
     /**
      * Constructor used for initializing the controller. It creates the game's view 
@@ -40,8 +40,25 @@ public class GameController implements ActionListener, ItemListener {
 
         row = height;
         column = width; 
-        model = new GameModel(height,width);
+
+        try{
+                if(column<1){
+                    System.out.println("Invalid argument, using default...");
+                column = DEFAULT_COLUMN;
+            }
+            if(row<1){
+                System.out.println("Invalid argument, using default...");
+                row = DEFAULT_ROW;
+            }
+        } catch(Exception e){
+            System.out.println("Invalid argument, using default...");
+            column = DEFAULT_COLUMN;
+            row = DEFAULT_ROW;
+        }
+        
+        model = new GameModel(row,column);
         view = new GameView(model,this);
+        
     }
 
 
