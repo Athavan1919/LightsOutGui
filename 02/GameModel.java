@@ -110,9 +110,15 @@ public class GameModel {
 	}
 
 	public void setSolution(){
-		minimal = LightsOut.solveShortest(this);
-		System.out.println("Solution is: ");
-		System.out.println(minimal);
+		try{
+			minimal = LightsOut.solveShortest(this);
+			System.out.println("Solution is: ");
+			System.out.println(minimal);
+		}
+		catch(Exception e){
+			System.out.println("No valid solution found");
+		}
+
 	}
 
 	public boolean solutionSelects(int i, int j){
