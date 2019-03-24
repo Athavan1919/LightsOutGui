@@ -19,6 +19,9 @@ public class QueueImplementation<E> implements Queue<E> {
      *      The reference to the new element
      */
     public void enqueue(E value) {
+        if (value == null){
+            throw new NullPointerException("Value is null");
+        }
 
         queue.add(value);
         
@@ -31,6 +34,10 @@ public class QueueImplementation<E> implements Queue<E> {
      *      The reference to removed Solution
      */
     public E dequeue() {
+
+        if (isEmpty()){
+            throw new IllegalStateException("Empty Queue");
+        }
 
         E first = queue.get(0);
         queue.remove(0);
@@ -50,6 +57,10 @@ public class QueueImplementation<E> implements Queue<E> {
         //System.out.println("Size is "+ length);
         return (length == 0);
         
+    }
+
+    public int size(){
+        return queue.size();
     }
 
 }

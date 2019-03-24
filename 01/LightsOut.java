@@ -96,6 +96,10 @@ public class LightsOut {
 
     public static ArrayList<Solution> solve(GameModel model){
 
+        if (model == null){
+            throw new NullPointerException("Model is null");
+        }
+
         Queue<Solution> q  = new QueueImplementation<Solution>();
         ArrayList<Solution> solutions  = new ArrayList<Solution>();
 
@@ -147,6 +151,10 @@ public class LightsOut {
     }
 
     public static Solution solveShortest(GameModel model){
+        if (model == null){
+            throw new NullPointerException("Model is null");
+        }
+
         ArrayList<Solution> solutions = solve(model);
 
         Solution shortest = solutions.get(0);

@@ -292,6 +292,9 @@ public class Solution {
     }
 
     public boolean stillPossible(boolean nextValue, GameModel model) {
+        if (model == null){
+            throw new NullPointerException("Model is null");
+        }
 
         if(currentIndex >= width*height) {
             System.out.println("Board already full");
@@ -337,6 +340,9 @@ public class Solution {
      }
     
      public boolean finish(GameModel model){
+        if (model == null){
+            throw new NullPointerException("Model is null");
+        }
 
         while(!isSuccessful(model) && (currentIndex < height*width)){
             if(this.stillPossible(true,model)){
@@ -353,8 +359,11 @@ public class Solution {
      }
 
      public boolean isSuccessful(GameModel model){
+        if (model == null){
+            throw new NullPointerException("Model is null");
+        }
+
         if(currentIndex < width*height) {
-           //System.out.println("Board not finished");
             return false;
         }
 

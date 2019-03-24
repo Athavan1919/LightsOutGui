@@ -26,12 +26,17 @@ public class GameModel {
 	}
 	
 	public void set(int i, int j, boolean value) {
-
+		if (j >= row || i >= column){
+			throw new IndexOutOfBoundsException("Not a valid position in board");
+		}
 		gameArray[j][i] = value;
 		
 	}
 	
 	public boolean isOn(int i, int j) {
+		if (i >= row || j >= column){
+			throw new IndexOutOfBoundsException("Not a valid position in board");
+		}
 		return gameArray[i][j];
 	}
 
@@ -45,6 +50,10 @@ public class GameModel {
 	}
 
 	public void click(int i, int j){
+		if (i >= row || j >= column){
+			throw new IndexOutOfBoundsException("Not a valid position in board");
+		}
+
         set(j , i , !isOn(i,j));
                         
         if ( (0 <= (j-1)) && ((j-1) < column) ){
@@ -82,11 +91,22 @@ public class GameModel {
 		return true;
 	}
 	public void randomize(){
-		for (int i=0; i < row; i++){
-			for (int j=0; j < column; j++){
-				this.set(j,i, Math.random() <0.5);
+		reset();
+		while (true){
+			try{
+				for (int i=0; i < row; i++){
+					for (int j=0; j < column; j++){
+						this.set(j,i, Math.random() <0.5);
+					}
+				}
+				setSolution();
+				break;
+			}
+			catch(Exception e){
+				System.out.println("No valid solution found");
 			}
 		}
+
 	}
 
 	public void setSolution(){
@@ -96,6 +116,9 @@ public class GameModel {
 	}
 
 	public boolean solutionSelects(int i, int j){
+		if (i >= row || j >= column){
+			throw new IndexOutOfBoundsException("Not a valid position in board");
+		}
 		return minimal.get(i,j);
 	}
 	

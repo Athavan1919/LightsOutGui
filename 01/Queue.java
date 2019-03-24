@@ -1,7 +1,11 @@
 public interface Queue<E> {
- 
+    
+    /**
+     * Checks if the queue is emopty 
+     * @return
+     *      True if the queue is empty otherwise false 
+     */
     boolean isEmpty();
-
 
 	/**
      * Add the reference to Solution at the rear of
@@ -18,4 +22,12 @@ public interface Queue<E> {
      *		The reference to removed Solution
      */
     E dequeue();
+
+
+    /**
+     * Outputs the size of the queue
+     * @return 
+     *      The size of the queue
+     */
+    int size();
 }

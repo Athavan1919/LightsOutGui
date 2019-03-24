@@ -37,7 +37,6 @@ public class GridButton extends JButton {
      */
 
     public GridButton(int row, int column, int type, GameView board) {
-            
             this.column = column;
             this.row = row;
             this.type = type;
@@ -47,7 +46,7 @@ public class GridButton extends JButton {
             Border emptyBorder = BorderFactory.createEmptyBorder(0, 0, 0, 0);
             setBorder(emptyBorder);
             setBorderPainted(false);
-            //addActionListener(board);
+     
 
     }
     

@@ -50,10 +50,10 @@ public class GameController implements ActionListener, ItemListener {
                 System.out.println("Invalid argument, using default...");
                 row = DEFAULT_ROW;
             }
-        } catch(Exception e){
+        } catch(NumberFormatException e){
             System.out.println("Invalid argument, using default...");
-            column = DEFAULT_COLUMN;
-            row = DEFAULT_ROW;
+            width   = DEFAULT_ROW;
+            height  = DEFAULT_COLUMN;
         }
         
         model = new GameModel(row,column);

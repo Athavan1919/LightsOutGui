@@ -291,37 +291,12 @@ public class Solution {
 
     }
 
-    /**
-     * checks if board[i][j] and its neighborhood
-     * have an odd number of values ``true''
-     */
-
-    private boolean oddNeighborhood(int i, int j) {
-        
-        if(i < 0 || i > height - 1 || j < 0 || j > width - 1) {
-            return false;
-        }
-
-        int total = 0;
-        if(board[i][j]){
-            total++;
-        }
-        if((i > 0) && (board[i-1][j])) {
-            total++;
-        }
-        if((i < height -1 ) && (board[i+1][j])) {
-            total++;
-        }
-        if((j > 0) && (board[i][j-1])) {
-            total++;
-        }
-        if((j < (width - 1)) && (board[i][j+1])) {
-            total++;
-        }
-        return (total%2)== 1 ;                
-    }
 
     public boolean stillPossible(boolean nextValue, GameModel model) {
+
+        if (model == null){
+            throw new NullPointerException("Model is null");
+        }
 
         if(currentIndex >= width*height) {
             System.out.println("Board already full");
@@ -367,6 +342,9 @@ public class Solution {
      }
     
      public boolean finish(GameModel model){
+        if (model == null){
+            throw new NullPointerException("Model is null");
+        }
 
 
         while(!isSuccessful(model) && (currentIndex < height*width)){
@@ -386,6 +364,9 @@ public class Solution {
 
 
      public boolean isSuccessful(GameModel model){
+        if (model == null){
+            throw new NullPointerException("Model is null");
+        }
         if(currentIndex < width*height) {
            //System.out.println("Board not finished");
             return false;
@@ -417,8 +398,41 @@ public class Solution {
      }
 
     public boolean get(int i,int j){
+        if (i >= width || j >= height){
+            throw new IndexOutOfBoundsException("Position does not exist in board");    
+        }
         return board[i][j];
      }
+
+    /**
+     * checks if board[i][j] and its neighborhood
+     * have an odd number of values ``true''
+     */
+
+    private boolean oddNeighborhood(int i, int j) {
+        
+        if(i < 0 || i > height - 1 || j < 0 || j > width - 1) {
+            return false;
+        }
+
+        int total = 0;
+        if(board[i][j]){
+            total++;
+        }
+        if((i > 0) && (board[i-1][j])) {
+            total++;
+        }
+        if((i < height -1 ) && (board[i+1][j])) {
+            total++;
+        }
+        if((j > 0) && (board[i][j-1])) {
+            total++;
+        }
+        if((j < (width - 1)) && (board[i][j+1])) {
+            total++;
+        }
+        return (total%2)== 1 ;                
+    }
 
 
     /**

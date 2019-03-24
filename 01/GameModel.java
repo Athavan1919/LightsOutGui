@@ -20,12 +20,17 @@ public class GameModel {
 	}
 	
 	public void set(int i, int j, boolean value) {
-
+		if (j >= row || i >= column){
+			throw new IndexOutOfBoundsException("Not a valid position in board");
+		}
 		gameArray[j][i] = value;
 		
 	}
 	
 	public boolean isOn(int i, int j) {
+		if (i >= row || j >= column){
+			throw new IndexOutOfBoundsException("Not a valid position in board");
+		}
 		return gameArray[i][j];
 	}
 
