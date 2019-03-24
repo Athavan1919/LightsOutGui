@@ -14,12 +14,19 @@ public class StudentInfo {
     */
 
     public static void display() {
+        System.out.println("************************************************************");
+        System.out.println("Aman Riat");
+        System.out.println("300056269");
+        System.out.println("ITI 1121-C");
+        System.out.println("Assignment 3");
+        System.out.println("************************************************************");
+        System.out.println();
 
         System.out.println("************************************************************");
-        System.out.println("*                                                          *");
-        System.out.println("*                                                          *");
-        System.out.println("*                                                          *");
-        System.out.println("*                                                          *");
+        System.out.println("Athavan Jeevakumar");
+        System.out.println("300060442");
+        System.out.println("ITI 1121-C");
+        System.out.println("Assignment 3");
         System.out.println("************************************************************");
         System.out.println();
 

@@ -72,6 +72,7 @@ public class GameController implements ActionListener, ItemListener {
                 
             }else if (e.getActionCommand().equals("Reset")){
                 model.reset();
+                model.setSolution();
                 System.out.println("");
                 System.out.println("Model has been reset: ");
                 System.out.println(model);

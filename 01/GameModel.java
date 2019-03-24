@@ -4,16 +4,11 @@ public class GameModel {
 	private int row;
 	private int column;
 	private boolean[][] gameArray;
-	private int numberOfClicks;
-	private Solution minimal;
 
-
-	
 	public GameModel(int width, int height) {
 		row = height;
 		column = width;
 		gameArray = new boolean[row][column];
-		//oddCounter = new int[row][column];
 	}
 	
 	public int getHeight() {

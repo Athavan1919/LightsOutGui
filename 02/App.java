@@ -1,7 +1,7 @@
 public class App{
 	public static void main(String[] args) {
 
-        GameController j = new GameController(3,3);
+        GameController j = new GameController(8,8);
 
     }
 }
